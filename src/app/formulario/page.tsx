@@ -1,4 +1,4 @@
-export default function FormularioPage() {
+export default function FormularioPage(){
     return (
         <h1>Formulário</h1>
     )
