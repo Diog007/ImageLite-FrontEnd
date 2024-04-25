@@ -26,6 +26,7 @@ export default function GaleriaPage() {
                         nome={image.name} 
                         src={image.url} 
                         tamanho={image.size} 
+                        extension={image.extension}
                         dataUpload={image.uploadDate} />
         )
     }
@@ -54,7 +55,7 @@ export default function GaleriaPage() {
 
                     <button className='bg-blue-500 text-white px-4 py-2 rounded-lg' onClick={searchImages}>Search</button>
                     <button className='bg-yellow-500 text-white px-4 py-2 rounded-lg'>Add New</button>
-                    
+
                 </div>
             </section>
 
