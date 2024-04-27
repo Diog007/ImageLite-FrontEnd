@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 interface TemplateProps {
     children: React.ReactNode
     loading?: boolean;
@@ -53,7 +55,9 @@ const Header: React.FC = () => {
     return(
         <header className="bg-indigo-950 text-white py-3">
             <div className="container mx-auto flex justify-between items-center px-4">
-                <h1 className="text-3x1 font-bold">ImageLite</h1>
+                <Link href="/galeria">
+                    <h1 className="text-3x1 font-bold">ImageLite</h1>
+                </Link>
             </div>
         </header>
     )
