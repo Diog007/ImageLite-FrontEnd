@@ -42,10 +42,10 @@ export default function GaleriaPage() {
     return (
         <Template loading={loading}>
             
-            <section className='flex flex-col items-center justify-center my-5'>
-                <div className='flex space-x-4'>
+            <section className='flex flex-col items-center justify-center my-10'>
+                <div className='flex space-x-4 my-7'>
 
-                    <InputText placeholder='Type name or Tags' onChange={event => setQuery(event.target.value)} />
+                    <InputText placeholder='Type name  Tags' onChange={event => setQuery(event.target.value)} />
 
                     <select onChange={event => setExtension(event.target.value)} 
 
