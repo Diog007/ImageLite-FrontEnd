@@ -1,26 +1,54 @@
+'use client'
+
 import { InputText, Template, Button } from "@/components"
 import Link from "next/link"
+import { useFormik } from "formik"
+
+interface FormProps {
+    name: string;
+    tags: string;
+    file: any;
+}
+
+const formScheme: FormProps = { name: '', tags: '', file: '' }
+
 
 export default function FormularioPage(){
+
+    const formik = useFormik<FormProps>({
+        initialValues: formScheme,
+        onSubmit: (dados: FormProps) => {
+            console.log(dados)
+        }
+    })
+
     return (
         <>
             <Template>
                 <section className="flex flex-col items-center justify-center my-10">
                     <h5 className="mt-7 mb-10 text-3x1 font-extrabold tracking-tight text-gray-900">Nova Imagem</h5>
-                    <form>
+                    
+                    <form onSubmit={formik.handleSubmit}>
                         <div className="grid grid-cols-1">
                             <label className="block text-sm font-medium leading-6 text-gray-700">Name: *</label>
-                            <InputText placeholder="type the image's name" />
+                            <InputText id="name" 
+                                        onChange={formik.handleChange} 
+                                        placeholder="type the image's name" />
                         </div>
+
                         <div className="mt-5 grid grid-cols-1">
                             <label className="block text-sm font-medium leading-6 text-gray-700">Tags: *</label>
-                            <InputText placeholder="type the tags comma separated" />
+                            <InputText id="tags" 
+                                        onChange={formik.handleChange} 
+                                        placeholder="type the tags comma separated" />
                         </div>
 
                         <div className="mt-5 grid grid-cols-1">
                             <label className="block text-sm font-medium leading-6 text-gray-700">Image: *</label>
                             <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                                
                                 <div className="text-center ">
+
                                     <svg className="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                         <path fillRule="evenodd" 
                                                 d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5
@@ -36,8 +64,8 @@ export default function FormularioPage(){
                                             <span>Click to upload</span>
                                             <input type="file" className="sr-only"></input>
                                         </label>
-
                                     </div>
+
                                 </div>
                             </div>
                         </div>
