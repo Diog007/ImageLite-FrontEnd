@@ -2,17 +2,10 @@
 
 import { InputText, Template, Button, RenderIf, useNotification } from "@/components"
 import { useImageService } from '@/resources/image/image.service'
-import Link from "next/link"
 import { useFormik } from "formik"
-import React, { useState } from 'react';
-
-interface FormProps {
-    name: string;
-    tags: string;
-    file: any;
-}
-
-const formScheme: FormProps = { name: '', tags: '', file: '' }
+import { useState } from 'react';
+import { FormProps, formScheme, formValidationScheme } from './formScheme'
+import Link from "next/link"
 
 export default function FormularioPage(){
 
@@ -24,7 +17,8 @@ export default function FormularioPage(){
 
     const formik = useFormik<FormProps>({
         initialValues: formScheme,
-        onSubmit: handleSubmit
+        onSubmit: handleSubmit,
+        validationSchema: formValidationScheme
     })
 
     async function handleSubmit(dados: FormProps) {
@@ -67,6 +61,9 @@ export default function FormularioPage(){
                                         onChange={formik.handleChange} 
                                         value={formik.values.name}
                                         placeholder="type the image's name" />
+                                        <span className="text-red-500">
+                                            { formik.errors.name }
+                                        </span>
                         </div>
 
                         <div className="mt-5 grid grid-cols-1">
@@ -75,6 +72,9 @@ export default function FormularioPage(){
                                         onChange={formik.handleChange} 
                                         value={formik.values.tags}
                                         placeholder="type the tags comma separated" />
+                                        <span className="text-red-500">
+                                            { formik.errors.tags }
+                                        </span>
                         </div>
 
                         <div className="mt-5 grid grid-cols-1">
