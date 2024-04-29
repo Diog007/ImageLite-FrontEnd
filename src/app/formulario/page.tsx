@@ -1,9 +1,10 @@
 'use client'
 
 import { InputText, Template, Button, RenderIf } from "@/components"
+import { useImageService } from '@/resources/image/image.service'
 import Link from "next/link"
 import { useFormik } from "formik"
-import { useState } from "react";
+import React, { useState } from 'react';
 
 interface FormProps {
     name: string;
@@ -13,18 +14,33 @@ interface FormProps {
 
 const formScheme: FormProps = { name: '', tags: '', file: '' }
 
-
 export default function FormularioPage(){
 
+    const [loading, setLoading] = useState<boolean>(false)
     const [imagePreview, setImagePreview] = useState<string>();
+    const service = useImageService();
 
 
     const formik = useFormik<FormProps>({
         initialValues: formScheme,
-        onSubmit: (dados: FormProps) => {
-            console.log(dados)
-        }
+        onSubmit: handleSubmit
     })
+
+    async function handleSubmit(dados: FormProps) {
+        setLoading(true);
+
+        const formData = new FormData();
+        formData.append("file", dados.file);
+        formData.append("name", dados.name);
+        formData.append("tags", dados.tags);
+
+        await service.salvar(formData)
+
+        formik.resetForm;
+        setImagePreview('');
+
+        setLoading(false)
+    }
 
     function onFileUpload(event: React.ChangeEvent<HTMLInputElement>){
         if(event.target.files){
@@ -37,22 +53,24 @@ export default function FormularioPage(){
 
     return (
         <>
-            <Template>
+            <Template loading={loading}>
                 <section className="flex flex-col items-center justify-center my-10">
                     <h5 className="mt-7 mb-10 text-3x1 font-extrabold tracking-tight text-gray-900">Nova Imagem</h5>
                     
                     <form onSubmit={formik.handleSubmit}>
                         <div className="grid grid-cols-1">
                             <label className="block text-sm font-medium leading-6 text-gray-700">Name: *</label>
-                            <InputText id="name" 
+                            <InputText  id="name" 
                                         onChange={formik.handleChange} 
+                                        value={formik.values.name}
                                         placeholder="type the image's name" />
                         </div>
 
                         <div className="mt-5 grid grid-cols-1">
                             <label className="block text-sm font-medium leading-6 text-gray-700">Tags: *</label>
-                            <InputText id="tags" 
+                            <InputText  id="tags" 
                                         onChange={formik.handleChange} 
+                                        value={formik.values.tags}
                                         placeholder="type the tags comma separated" />
                         </div>
 
@@ -92,7 +110,7 @@ export default function FormularioPage(){
                             </div>
                         </div>
 
-                        <div className="mt-5 flex items-center justify-end gap-x-4 ">
+                        <div className="mt-5 flex items-center justify-end gap-x-20 ">
                             <Button style="bg-blue-500 hover:bg-blue-300" type="submit" label="Save"/>
                             <Link href="/galeria">
                                 <Button style="bg-red-500 hover:bg-red-300" type="button" label="Cancel"/>
