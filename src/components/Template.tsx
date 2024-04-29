@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ToastContainer } from 'react-toastify'
 
 interface TemplateProps {
     children: React.ReactNode
@@ -16,10 +17,16 @@ export const Template: React.FC<TemplateProps> = ({ children, loading = false }:
                             <Loading/>
                         </div> 
                     </RenderIf>
-
                     { children }    
                 </div>
             <Footer/>
+            <ToastContainer position='top-right'
+                            autoClose={8000}
+                            hideProgressBar={false}
+                            draggable={false}
+                            closeOnClick={true}
+                            pauseOnHover={true}
+                    />
         </>
     )
 }
