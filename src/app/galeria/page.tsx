@@ -1,6 +1,6 @@
 'use client'
 
-import { Template, ImageCard, Button, InputText, useNotification } from '@/components'
+import { Template, ImageCard, Button, InputText, useNotification, AuthenticatedPage } from '@/components'
 import { Image } from '@/resources/image/image.resource';
 import { useImageService } from '@/resources'
 import { useState } from 'react'
@@ -45,36 +45,37 @@ export default function GaleriaPage() {
     }
 
     return (
-        <Template loading={loading}>
-            
-            <section className='flex flex-col items-center justify-center my-5'>
-                <div className='flex space-x-4 my-7'>
+        <AuthenticatedPage>
+            <Template loading={loading}>
+                <section className='flex flex-col items-center justify-center my-5'>
+                    <div className='flex space-x-4 my-7'>
 
-                    <InputText placeholder='Type name  Tags' onChange={event => setQuery(event.target.value)} />
+                        <InputText placeholder='Type name  Tags' onChange={event => setQuery(event.target.value)} />
 
-                    <select onChange={event => setExtension(event.target.value)} 
+                        <select onChange={event => setExtension(event.target.value)} 
 
-                            className='border px-4 py-2 rounded-lg text-gray-900 hover:bg-gray-100'>
-                        <option value="">All formats</option>
-                        <option value="PNG">PNG</option>
-                        <option value="JPEG">JPEG</option>
-                        <option value="GIF">GIF</option>
-                    </select>
+                                className='border px-4 py-2 rounded-lg text-gray-900 hover:bg-gray-100'>
+                            <option value="">All formats</option>
+                            <option value="PNG">PNG</option>
+                            <option value="JPEG">JPEG</option>
+                            <option value="GIF">GIF</option>
+                        </select>
 
-                    <Button style='bg-blue-500 hover:bg-blue-300' label='Search' onClick={searchImages}/>
-                    
-                    <Link href="/formulario">
-                        <Button style='bg-yellow-500 hover:bg-yellow-300' label= 'Add New' />
-                    </Link>
+                        <Button style='bg-blue-500 hover:bg-blue-300' label='Search' onClick={searchImages}/>
+                        
+                        <Link href="/formulario">
+                            <Button style='bg-yellow-500 hover:bg-yellow-300' label= 'Add New' />
+                        </Link>
 
-                </div>
-            </section>
-            <section className='grid grid-cols-4 gap-8'>
-                {
-                    renderImageCards()
-                }
-            </section>
+                    </div>
+                </section>
+                <section className='grid grid-cols-4 gap-8'>
+                    {
+                        renderImageCards()
+                    }
+                </section>
 
-        </Template>
+            </Template>
+        </AuthenticatedPage>
     )
 }
