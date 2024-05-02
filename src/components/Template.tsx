@@ -72,15 +72,10 @@ const Header: React.FC = () => {
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-indigo-950 text-white py-4 mt-8 ">
+        <footer className="bg-indigo-950 text-white py-3 mt-8 fixed bottom-0 w-full">
             <div className="container mx-auto text-center">
                 Desenvolvido por Diogo Nascimento
             </div>
-
-
         </footer>
-
-
-    )
-
-}
+    );
+};
