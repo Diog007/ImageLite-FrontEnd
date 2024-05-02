@@ -36,12 +36,6 @@ class AuthService {
             throw new Error(responserError.error)
         }
     }
-
-
-
-
-
-
 }
 
 export const useAuth = () => new AuthService();
