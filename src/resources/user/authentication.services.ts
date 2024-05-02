@@ -14,11 +14,34 @@ class AuthService {
         });
 
         if(response.status == 401){
-            throw new Error("User or password are incorrent!")
+            throw new Error("User or password are incorrect!")
         }
 
         return await response.json();
     }
+
+    async save(user: User) : Promise<void> {
+        const response = await fetch(this.baseURL, {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        console.log("Reposta Auth.save ", response);
+
+        if(response.status == 409){
+            const responserError = await response.json();
+            throw new Error(responserError.error)
+        }
+    }
+
+
+
+
+
+
 }
 
 export const useAuth = () => new AuthService();
