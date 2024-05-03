@@ -19,9 +19,6 @@ export const AuthenticatedPage: React.FC<AuthenticatedPageProps> = ({
     return (
         <>
             {children}
-        
         </>
     )
-
-
 }

@@ -58,7 +58,7 @@ class AuthService {
     setUserSession(userSessionToken: UserSessionToken){
         localStorage.setItem(AuthService.AUTH_PARAM, JSON.stringify(userSessionToken))
     }
-
+    
     getUserSession() : UserSessionToken | null {
         const authString = localStorage.getItem(AuthService.AUTH_PARAM)
         if(!authString){
@@ -75,6 +75,7 @@ class AuthService {
         }
         
         const expiration : number | undefined = userSession.expiration;
+        
         if(expiration){
             const expirationDateinMillis = expiration * 1000;
             return new Date() < new Date(expirationDateinMillis);
