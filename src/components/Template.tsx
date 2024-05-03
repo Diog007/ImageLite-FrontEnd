@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link';
 import { useAuth } from '@/resources'
 import { ToastContainer } from 'react-toastify'
@@ -85,7 +87,7 @@ const Header: React.FC = () => {
                                 Olá, {user?.name}
                             </span>
                             <span className="w-64 py-3 px-6 text-sm">
-                                <a href="#" onClick={logout} >
+                                <a href="/login" onClick={logout} >
                                     Sair
                                 </a>
                             </span>  

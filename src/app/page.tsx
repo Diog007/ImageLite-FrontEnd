@@ -1,7 +1,19 @@
-export default function Home() {
-  return (
-    <div>
+'use client'
 
-    </div>
+import { useAuth } from "@/resources"
+import LoginPage from './login/page'
+import GaleriaPage from "./galeria/page"
+
+export default function Home() {
+
+  const auth = useAuth();
+  const user = auth.getUserSession();
+
+  if(!user){
+    return <LoginPage/>
+  }
+
+  return (
+    <GaleriaPage/>
   )
 }
