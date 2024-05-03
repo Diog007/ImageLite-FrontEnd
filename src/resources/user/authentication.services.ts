@@ -85,6 +85,10 @@ class AuthService {
 
     }
 
+    invalidateSession(): void {
+        localStorage.removeItem(AuthService.AUTH_PARAM);
+    }
+
 
 }
 
