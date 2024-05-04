@@ -1,4 +1,4 @@
-export { Template, RenderIf } from './Template'
+export { Template, RenderIf, TemplateFor } from './Template'
 export { ImageCard } from './ImageCard'
 export { Button } from './button'
 export { InputText, FieldError } from './input'

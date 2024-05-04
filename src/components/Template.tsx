@@ -34,6 +34,30 @@ export const Template: React.FC<TemplateProps> = ({ children, loading = false }:
         </>
     )
 }
+export const TemplateFor: React.FC<TemplateProps> = ({ children, loading = false }: TemplateProps) => {
+    return(
+        <>
+            <Header/>
+                <div className={`${loading ? 'animate-pulse': '' } container mx-auto mt-8 px-4 `}>
+
+                    <RenderIf condition ={loading}>
+                        <div className="text-center">
+                            <Loading/>
+                        </div> 
+                    </RenderIf>
+                    { children }    
+                </div>
+            <FooterFormulario/>
+            <ToastContainer position='top-right'
+                            autoClose={8000}
+                            hideProgressBar={false}
+                            draggable={false}
+                            closeOnClick={true}
+                            pauseOnHover={true}
+                    />
+        </>
+    )
+}
 
 interface RenderIfProps {
     condition?: boolean;
@@ -99,9 +123,19 @@ const Header: React.FC = () => {
     )
 }
 
+const FooterFormulario: React.FC = () => {
+    return (
+        <footer className="bg-indigo-950 text-white py-3 mt-8 bottom-0 fixed w-full">
+            <div className="container mx-auto text-center">
+                Desenvolvido por Diogo Nascimento
+            </div>
+        </footer>
+    );
+};
+
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-indigo-950 text-white py-3 mt-8 fixed bottom-0 w-full">
+        <footer className="bg-indigo-950 text-white py-3 mt-8 ">
             <div className="container mx-auto text-center">
                 Desenvolvido por Diogo Nascimento
             </div>
