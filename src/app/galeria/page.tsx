@@ -47,8 +47,8 @@ export default function GaleriaPage() {
     return (
         <AuthenticatedPage>
             <Template loading={loading}>
-                <section className='flex flex-col items-center justify-center my-1'>
-                    <div className='flex space-x-6 my-10'>
+                <section className='flex flex-col items-center justify-center my-5'>
+                    <div className='flex space-x-6 my-8'>
 
                         <InputText placeholder='Type name  Tags' onChange={event => setQuery(event.target.value)} />
 
