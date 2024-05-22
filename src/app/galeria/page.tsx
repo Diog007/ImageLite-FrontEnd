@@ -5,8 +5,13 @@ import { Image } from '@/resources/image/image.resource';
 import { useImageService } from '@/resources'
 import { useState } from 'react'
 import Link from 'next/link';
+import { useEffect } from 'react'
 
 export default function GaleriaPage() {
+
+    useEffect( () => {
+        searchImages();
+    }  , []  ) 
 
 
     const useService = useImageService();
